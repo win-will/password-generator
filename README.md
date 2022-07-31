@@ -40,6 +40,6 @@ https://win-will.github.io/password-generator/
 
 ## Mock-up
 
-![The Password Generator application displays a red button to "Generate Password".](./assets/03-javascript-homework-demo.png)
+![The Password Generator application displays a red button to "Generate Password".](./assets/images/03-javascript-homework-demo.png)
 
 
