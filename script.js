@@ -13,43 +13,35 @@ function writePassword() {
 function generatePassword() {
   var password = "";
   var mandatoryChars = [];
+  var types = [];
   var length = prompt("Enter a password length that is at least 8 characters and no more than 128 characters");
-  
-  //Check if user selected a password length that meets the criteria
-  if ( (7 < parseInt(length)) && (parseInt(length) < 129) ) {
-    // var lowercase = false;
-    // var uppercase = false;
-    // var numeric = false;
-    // var special_chars = false;
-    var types = [];
-    pwdArray = [];
 
+  //Check if user selected a password length that meets the criteria
+  if ( (7 < parseInt(length)) && (parseInt(length) < 129) ) {   
+   
+    //Prompt user for character types that should be used
     if (confirm("Include lowercase in your password?") ){
-      // lowercase = true;
       types.push("l");
       mandatoryChars.push(generateRandom(generateCharaterset("l"),1)[0]);
     }
     if (confirm("Include uppercase in your password?") ){
-      // uppercase = true;
       types.push("u");
       mandatoryChars.push(generateRandom(generateCharaterset("u"),1)[0]);
     }
     if (confirm("Include numeric in your password?") ){
-      // lowercase = true;
       types.push("n");
       mandatoryChars.push(generateRandom(generateCharaterset("n"),1)[0]);
     }
     if (confirm("Include special characters in your password?") ){
-      // lowercase = true;
       types.push("s");
       mandatoryChars.push(generateRandom(generateCharaterset("s"),1)[0]);
     }
-
+  
     // console.log("Mandatory Chars")
     // console.log(mandatoryChars)
-    
+
     //Check if user selected one or more of the different allowed character sets 
-    if (types.length > 0){
+    if (types.length > 0){ 
       var baseArray = [];
       var randomArray = [];
       
@@ -69,18 +61,19 @@ function generatePassword() {
       password = insertMandatoryChars(randomArray,mandatoryChars);
       
     }
-    
+
     else {
       // alert("You selected none of the available character choices.");
       password = "Error: You did not select at least one of the available character sets. Please try again."
-
-    }
+    
+    }  
 
   }
 
   else {
     // alert("Password length doesn't meet the criteria.");
     password = "Error: Password length doesn't meet the criteria. Please try again."
+  
   }
 
   return password;
@@ -136,7 +129,6 @@ function generateCharaterset(strType){
   }
 
   return arrayBase; 
-
 }
 
 //Generated a random array using a starter array and it's size
@@ -153,9 +145,9 @@ function generateRandom(starterArray, strSize) {
   }
   
   return randomArray;
-  
 }
 
+// Take two arrays and merge them in a random way, return a string 
 function insertMandatoryChars(randomArray, manChars){
   var index = 0;
   var pwd = ""
@@ -176,7 +168,6 @@ function insertMandatoryChars(randomArray, manChars){
   return pwd;
 
 }
-
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
