@@ -6,6 +6,7 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
+  //Password will be outputted to screen here
   passwordText.value = password;
 
 }
@@ -20,19 +21,19 @@ function generatePassword() {
   if ( (7 < parseInt(length)) && (parseInt(length) < 129) ) {   
    
     //Prompt user for character types that should be used
-    if (confirm("Include lowercase in your password?") ){
+    if (confirm("Include lowercase in your password, i.e. a, b, or c?") ){
       types.push("l");
       mandatoryChars.push(generateRandom(generateCharaterset("l"),1)[0]);
     }
-    if (confirm("Include uppercase in your password?") ){
+    if (confirm("Include uppercase in your password, i.e A, B, or C?") ){
       types.push("u");
       mandatoryChars.push(generateRandom(generateCharaterset("u"),1)[0]);
     }
-    if (confirm("Include numeric in your password?") ){
+    if (confirm("Include numbers in your password, i.e 1, 2, or 3?") ){
       types.push("n");
       mandatoryChars.push(generateRandom(generateCharaterset("n"),1)[0]);
     }
-    if (confirm("Include special characters in your password?") ){
+    if (confirm("Include special characters in your password, i.e &, *, or %?") ){
       types.push("s");
       mandatoryChars.push(generateRandom(generateCharaterset("s"),1)[0]);
     }
@@ -63,7 +64,7 @@ function generatePassword() {
     }
 
     else {
-      // alert("You selected none of the available character choices.");
+      // Print an error in the text box for the if none of the character types is selected
       password = "Error: You did not select at least one of the available character sets. Please try again."
     
     }  
@@ -71,7 +72,7 @@ function generatePassword() {
   }
 
   else {
-    // alert("Password length doesn't meet the criteria.");
+    // Print an error in the text box if the pwd length requirements aren't met
     password = "Error: Password length doesn't meet the criteria. Please try again."
   
   }
@@ -83,19 +84,22 @@ function generatePassword() {
 function generateCharaterset(strType){
   var arrayBase = [];
 
+  //Add uppercase characters to the base array
   if (strType === 'u') {
     
     for (let i =0; i < 26; i++ ){
       arrayBase.push(String.fromCharCode(65 + i));
     }
 
-  }                                 
+  }    
+  //Add lowercase characters to the base array                             
   else if (strType === "l") {
 
      for (let i =0; i < 26; i++ ){
         arrayBase.push(String.fromCharCode(97 + i));
       }
   }
+  //Add numeric characters to the base array 
   else if (strType === "n"){
 
     for (let i =0; i < 10; i++ ){
@@ -104,6 +108,7 @@ function generateCharaterset(strType){
     }
 
   }
+  //Add special characters to the base array 
   else if (strType === "s"){
 
       for (let i =0; i < 16; i++ ){
@@ -123,6 +128,7 @@ function generateCharaterset(strType){
       }
 
     }
+  //If none of those were provided then there is some type of issue in the code
   else { 
     console.log("Invalid Character provided.")
 
@@ -138,6 +144,7 @@ function generateRandom(starterArray, strSize) {
 
   // console.log(strSize);
 
+  //Take an array of characters then randomly concantenate them into another array
   for (let i = 0; i < strSize; i++) {
     randomIndex = Math.floor(Math.random() * starterArray.length);
     randomArray = randomArray.concat(starterArray[randomIndex]);
@@ -152,15 +159,19 @@ function insertMandatoryChars(randomArray, manChars){
   var index = 0;
   var pwd = ""
 
+  //Put the require characters in a random place in the array that is provided
+  //Using a random index number, breaking the array into two parts then re-joining it
   for(i=0;i<manChars.length;i++){
     index = Math.floor(Math.random() * randomArray.length);
     randomArray.splice(index, 0, manChars[i]);
+    console.log(randomArray);
     randomArray.join();
     // console.log("Insert Mandatory Chars: " + i);
     // console.log(randomArray);
 
   }
 
+  //Take array and convert it into a string
   for(i=0;i <randomArray.length;i++) {
     pwd = pwd + randomArray[i];
   }
